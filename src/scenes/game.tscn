@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4uttexwxr1pi"]
+
+[ext_resource type="Script" path="res://scripts/object_spawner.gd" id="1_krvd8"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_ywivy"]
+[ext_resource type="PackedScene" uid="uid://31fss0eipuhj" path="res://scenes/player.tscn" id="2_8txdm"]
+[ext_resource type="Texture2D" uid="uid://bqpft01nestrg" path="res://textures/grass.png" id="3_4haxg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ct34a"]
+font_size = 26
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_adq1g"]
+size = Vector2(600, 64)
+
+[node name="Game" type="Node"]
+script = ExtResource("1_ywivy")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreDisplay" type="Label" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+text = "0"
+label_settings = SubResource("LabelSettings_ct34a")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ObjectSpawner" type="Node" parent="."]
+script = ExtResource("1_krvd8")
+
+[node name="CooldownTimer" type="Timer" parent="ObjectSpawner"]
+wait_time = 0.75
+one_shot = true
+autostart = true
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="Node2D"]
+use_parent_material = true
+position = Vector2(0, 594)
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Floor"]
+position = Vector2(300, 14)
+scale = Vector2(75, 8)
+texture = ExtResource("3_4haxg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Floor"]
+position = Vector2(300, 14)
+shape = SubResource("RectangleShape2D_adq1g")
+
+[node name="Player" parent="Node2D" instance=ExtResource("2_8txdm")]
+use_parent_material = true
+
+[connection signal="timeout" from="ObjectSpawner/CooldownTimer" to="ObjectSpawner" method="_when_cooldown_ended"]

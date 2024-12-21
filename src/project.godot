@@ -1,0 +1,84 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Slime Run"
+config/version="1.0.0"
+run/main_scene="res://scenes/game.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="slime_run"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://icon.png"
+
+[autoload]
+
+GameOverScreen="*res://scenes/game_over_screen.tscn"
+GameOverSound="*res://sounds/GameOverSound.tscn"
+CollectSound="*res://sounds/CollectSound.tscn"
+JumpSound="*res://sounds/JumpSound.tscn"
+
+[display]
+
+window/size/viewport_width=600
+window/size/viewport_height=600
+window/size/resizable=false
+window/stretch/mode="viewport"
+display_server/driver.windows="windows"
+display_server/driver.linuxbsd="wayland"
+display_server/driver.android="android"
+display_server/driver.ios="iOS"
+display_server/driver.macos="macos"
+
+[editor_plugins]
+
+enabled=PackedStringArray()
+
+[global_group]
+
+hazard=""
+coins=""
+
+[gui]
+
+theme/custom_font="res://font.ttf"
+
+[input]
+
+jump={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"location":0,"echo":false,"script":null)
+]
+}
+
+[layer_names]
+
+2d_render/layer_1="Floor"
+2d_render/layer_2="Player"
+2d_render/layer_3="Hazards"
+2d_render/layer_4="Collectables"
+2d_physics/layer_1="Floor"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Hazards"
+2d_physics/layer_4="Collectables"
+
+[physics]
+
+2d/physics_engine="Rapier2D"
+2d/default_gravity=1860.0
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+rendering_device/driver.windows="d3d12"
+gl_compatibility/driver.windows="opengl3_angle"
+gl_compatibility/driver.linuxbsd="opengl3_es"
+gl_compatibility/driver.macos="opengl3_angle"
+environment/defaults/default_clear_color=Color(0.286275, 0.592157, 0.745098, 1)

@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dne52bc4q10x3"]
+
+[ext_resource type="Script" path="res://scripts/hazard.gd" id="1_4p4yn"]
+[ext_resource type="Texture2D" uid="uid://c5un4qvu41k47" path="res://textures/spike.png" id="2_vysst"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bngo2"]
+size = Vector2(48, 64)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_wslxk"]
+b = Vector2(0, -576)
+
+[node name="Hazard" type="Node2D" groups=["hazard"]]
+script = ExtResource("1_4p4yn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(8, 8)
+texture = ExtResource("2_vysst")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_bngo2")
+
+[node name="TopArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopArea"]
+shape = SubResource("SegmentShape2D_wslxk")

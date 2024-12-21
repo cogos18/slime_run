@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu8yjrp1u0hwy"]
+
+[ext_resource type="AudioStream" uid="uid://dm8x4bty24jix" path="res://sounds/collect_coin.wav" id="1_86jh7"]
+
+[node name="CollectSound" type="AudioStreamPlayer"]
+stream = ExtResource("1_86jh7")

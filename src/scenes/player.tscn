@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://31fss0eipuhj"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_mpm2i"]
+[ext_resource type="Texture2D" uid="uid://2acotxitde6b" path="res://textures/player1.png" id="2_7id0t"]
+[ext_resource type="Texture2D" uid="uid://b0tc6nhkje7dx" path="res://textures/player2.png" id="3_1845v"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l7vb5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7id0t")
+}],
+"loop": true,
+"name": &"grounded",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1845v")
+}],
+"loop": true,
+"name": &"midair",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rvnwg"]
+radius = 24.0
+height = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2u7tq"]
+radius = 40.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(96, 544)
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_mpm2i")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1.90735e-06, 1.43051e-05)
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_l7vb5")
+animation = &"grounded"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_rvnwg")
+
+[node name="HitArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource("CircleShape2D_2u7tq")
+
+[node name="JumpTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
