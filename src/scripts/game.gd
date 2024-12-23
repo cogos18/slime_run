@@ -27,9 +27,7 @@ func _handle_movement(delta: float) -> void:
 		
 		if node is Coin or node is Hazard:
 			node.position.x -= player.vel * delta
-			   
-			if node.position.x <= -354.0:
-				node.queue_free()
+		
 
 
 func _game_over(points: int) -> void:
@@ -40,6 +38,7 @@ func _game_over(points: int) -> void:
 	JumpSound.stop()
 	CollectSound.stop()
 	GameOverSound.play()
+	Log.info("Game over!")
 	
 
 
@@ -65,6 +64,9 @@ func _connect_signals_to_objects() -> void:
 	
 	
 	for node: Node2D in nodes:
+		if !node.tree_exiting.is_connected(Log.info.bind(str(node.get_path()) + " freed.")):
+			node.tree_exiting.connect(Log.info.bind(str(node.get_path()) + " freed."))
+		
 		if node is Coin and !node.collected.is_connected(_on_coin_collected.bind(node.value)):
 			node.collected.connect(_on_coin_collected.bind(node.value))
 		

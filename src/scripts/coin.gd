@@ -5,6 +5,7 @@ class_name Coin extends Node2D
 
 
 @onready var hitbox: Area2D = $HitBox
+@onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
 var value: int = 100
 
@@ -26,8 +27,13 @@ func _snap_to_pixel() -> void:
 		snappedf(position.y, 2.5)
 	)
 
+func _disappear_once_off_screen() -> void:
+	if (!visible_on_screen_notifier.is_on_screen() and position.x <= get_viewport().size.x):
+		queue_free()
+
 
 func _process(_delta: float) -> void:
+	_disappear_once_off_screen()
 	_handle_collisions()
 
 

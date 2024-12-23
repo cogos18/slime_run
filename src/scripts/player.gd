@@ -39,6 +39,7 @@ func _handle_gravity(gravity: float, delta: float) -> void:
 	if is_on_floor():
 		can_jump = true
 		sprite.play("grounded")
+		velocity.y = 0
 		return
 	else:
 		sprite.play("midair")
@@ -70,6 +71,6 @@ func _physics_process(delta: float) -> void:
 	
 	vel += acceleration * delta
 	
-	_handle_gravity(gravity, delta)
-	_handle_input()
-	_snap_to_pixel()
+	_handle_gravity.bind(gravity, delta).call_deferred()
+	_handle_input.call_deferred()
+	_snap_to_pixel.call_deferred()

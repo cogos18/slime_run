@@ -27,3 +27,5 @@ shape = SubResource("RectangleShape2D_bngo2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopArea"]
 shape = SubResource("SegmentShape2D_wslxk")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

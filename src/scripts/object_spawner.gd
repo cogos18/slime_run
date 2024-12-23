@@ -13,6 +13,7 @@ func _spawn_object(path: String, pos: Vector2) -> void:
 	var obj = load(path).instantiate()
 	owner.get_node("Node2D").add_child(obj)
 	obj.position = pos
+	Log.info(path + " spawned " + str(obj.position))
 
 func _when_cooldown_ended() -> void:
 	cooldown_timer.wait_time = randf_range(0.75, 1.0) * (owner.player.vel / 1000)
