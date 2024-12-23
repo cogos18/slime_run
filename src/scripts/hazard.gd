@@ -33,7 +33,7 @@ func _snap_to_pixel() -> void:
 	)
 
 func _disappear_once_off_screen() -> void:
-	if (!visible_on_screen_notifier.is_on_screen() and position.x <= get_viewport().size.x):
+	if (!visible_on_screen_notifier.is_on_screen() and position.x <= -300):
 		queue_free()
 
 func _process(_delta: float) -> void:
