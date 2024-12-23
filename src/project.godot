@@ -24,6 +24,7 @@ GameOverScreen="*res://scenes/game_over_screen.tscn"
 GameOverSound="*res://sounds/GameOverSound.tscn"
 CollectSound="*res://sounds/CollectSound.tscn"
 JumpSound="*res://sounds/JumpSound.tscn"
+Log="*res://addons/logger/logger.gd"
 
 [display]
 
@@ -39,7 +40,7 @@ display_server/driver.macos="macos"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/logger/plugin.cfg")
 
 [global_group]
 
