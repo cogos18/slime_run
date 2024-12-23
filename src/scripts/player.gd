@@ -23,8 +23,6 @@ func _jump(jump_height: float) -> void:
 		return
 	
 	if jump_timer.is_stopped():
-		JumpSound.stop()
-		CollectSound.stop()
 		JumpSound.play()
 		jump_timer.start()
 	
@@ -43,6 +41,8 @@ func _handle_gravity(gravity: float, delta: float) -> void:
 		return
 	else:
 		sprite.play("midair")
+		
+		sprite.frame = int(velocity.y >= 0)
 	
 	velocity.y += gravity * delta
 

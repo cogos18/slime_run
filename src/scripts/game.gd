@@ -32,11 +32,10 @@ func _handle_movement(delta: float) -> void:
 
 func _game_over(points: int) -> void:
 	player.vel = 0
+	player.sprite.play("hit")
 	node_2d.process_mode = Node.PROCESS_MODE_DISABLED
 	$ObjectSpawner.process_mode = Node.PROCESS_MODE_DISABLED
 	GameOverScreen.show()
-	JumpSound.stop()
-	CollectSound.stop()
 	GameOverSound.play()
 	Log.info("Game over!")
 	
@@ -47,9 +46,6 @@ func add_point(amount: int) -> void:
 
 
 func _on_coin_collected(value: int) -> void:
-	JumpSound.stop()
-	CollectSound.stop()
-	GameOverSound.stop()
 	CollectSound.play()
 	
 	add_point(value)
